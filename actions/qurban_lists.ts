@@ -23,7 +23,7 @@ export async function updateCowsState({
   const query = { _id: new ObjectId(id) };
 
   const now = new Date().toISOString();
-  const updateSet = { killed, killedAt: now };
+  const updateSet = { killed, killedAt: killed ? now : null };
 
   await db.collection('qurban_lists').updateOne(query, { $set: updateSet });
   await logAction({
@@ -36,20 +36,26 @@ export async function updateCowsState({
 
 // ----------------------------------------------------------------------------
 
-type UpdateSohibulParams = { id: string; name: string; pickedUp: boolean };
+type UpdateSohibulParams = {
+  id: string;
+  index: number;
+  name: string;
+  pickedUp: boolean;
+};
 
 export async function updateSohibulState({
   id,
+  index,
   name,
   pickedUp,
 }: UpdateSohibulParams) {
   const db = client.db('kurban1447h');
-  const query = { _id: new ObjectId(id), 'sohibul.name': name };
+  const query = { _id: new ObjectId(id) };
 
   const now = new Date().toISOString();
   const updateSet = {
-    'sohibul.$.pickedUp': pickedUp,
-    'sohibul.$.pickedUpAt': now,
+    [`sohibul.${index}.pickedUp`]: pickedUp,
+    [`sohibul.${index}.pickedUpAt`]: pickedUp ? now : null,
   };
 
   await db.collection('qurban_lists').updateOne(query, { $set: updateSet });
