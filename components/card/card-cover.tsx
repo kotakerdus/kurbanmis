@@ -22,12 +22,10 @@ export function CardCover({
           filter: `${killed ? 'grayscale(100%)' : ''}`,
         }}
       />
-      <span className='absolute top-2 left-3 text-xl font-bold md:text-2xl'>{`${type} #${order}`}</span>
-      {killed && (
+      <span className='absolute top-2 left-3 text-2xl font-bold lg:text-3xl'>{`${type} #${order}`}</span>
+      {killed && killedAt && (
         <div className='absolute right-2 bottom-2 flex gap-2'>
-          {killedAt && (
-            <p className='font-mono'>{`@${toTwentyFourHours(killedAt)}`}</p>
-          )}
+          <p className='font-mono'>{toTwentyFourHours(killedAt)}</p>
           <CheckIcon />
         </div>
       )}
