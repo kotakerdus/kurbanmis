@@ -1,7 +1,6 @@
 import { updateCowsState } from '@/actions/qurban_lists';
 import { Button, PageTitle } from '@/components';
-import { Card } from '@/components/card';
-import { CardCover } from '@/components/card/card-cover';
+import { Card, CardCover } from '@/components/card';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { QurbanList } from '@/types';
