@@ -30,6 +30,8 @@ export default async function PenyembelihanPage() {
               await updateCowsState({
                 id: limo._id.toString(),
                 killed: !limo.killed,
+                type: limo.type,
+                order: limo.order,
               });
             }}
           >
@@ -60,6 +62,8 @@ export default async function PenyembelihanPage() {
               await updateCowsState({
                 id: bali._id.toString(),
                 killed: !bali.killed,
+                type: bali.type,
+                order: bali.order,
               });
             }}
           >
