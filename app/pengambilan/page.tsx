@@ -8,7 +8,7 @@ import { QurbanList } from '@/types';
 import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
 import { CheckIcon } from 'lucide-react';
 
-export default async function SlaughteringPage() {
+export default async function PengambilanPage() {
   const db = client.db('kurban1447h');
   const data = await db
     .collection<QurbanList>('qurban_lists')
