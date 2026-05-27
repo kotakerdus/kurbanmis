@@ -32,7 +32,7 @@ export function NavLink({ link }: IconProps) {
 
   return (
     <li
-      className={`w-full hover:bg-black/10 sm:rounded-md md:w-auto ${isActive ? 'text-accent' : ''}`}
+      className={`hover:bg-foreground/10 w-full sm:rounded-md md:w-auto ${isActive ? 'text-accent' : ''}`}
     >
       <Link
         href={link}

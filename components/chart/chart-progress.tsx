@@ -41,7 +41,7 @@ export function ChartProgress({
               if (isEdge) return null;
               return (
                 <div key={index} className='relative'>
-                  <div className='absolute top-0 right-0 h-full w-0.5 bg-white lg:w-1 dark:bg-black' />
+                  <div className='bg-background absolute top-0 right-0 h-full w-0.5 lg:w-1' />
                 </div>
               );
             })}

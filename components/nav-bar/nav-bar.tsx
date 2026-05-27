@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { NavLink, NavUser } from '.';
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react';
+import { useState } from 'react';
+import { NavLink } from '.';
 
 export function NavBar() {
   const [hide, setHide] = useState(false);
@@ -12,13 +12,12 @@ export function NavBar() {
       <div
         className={`border-t-ctp-surface1 sm:border-r-ctp-surface1 bg-ctp-mantle border-t select-none sm:border-t-0 sm:border-r sm:px-2 sm:py-4 md:p-5 ${hide ? 'sm:hidden' : 'block'}`}
       >
-        <ul className='flex h-full flex-row justify-between sm:flex-col sm:gap-2'>
+        <ul className='flex h-full flex-row sm:flex-col sm:gap-2'>
           <NavLink link='dashboard' />
           <NavLink link='penyembelihan' />
           <NavLink link='pengambilan' />
           <NavLink link='pengiriman' />
           <NavLink link='logs' />
-          <NavUser />
         </ul>
       </div>
       <button
