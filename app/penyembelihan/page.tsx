@@ -1,10 +1,10 @@
 import { updateCowsState } from '@/actions/qurban_lists';
 import { Button, PageTitle } from '@/components';
 import { Card } from '@/components/card';
+import { CardCover } from '@/components/penyembelihan/card-cover';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { QurbanList } from '@/types';
-import { CheckCircle2Icon } from 'lucide-react';
 
 export default async function PenyembelihanPage() {
   const db = client.db('kurban1447h');
@@ -20,31 +20,28 @@ export default async function PenyembelihanPage() {
     <WrapperMain>
       <PageTitle />
       <WrapperCard className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-        {limosin.map((limo) => (
+        {limosin.map((cow) => (
           <form
-            key={limo._id.toString() + 'form'}
+            key={cow._id.toString() + 'form'}
             action={async () => {
               'use server';
               await updateCowsState({
-                id: limo._id.toString(),
-                killed: !limo.killed,
-                type: limo.type,
-                order: limo.order,
+                id: cow._id.toString(),
+                killed: !cow.killed,
+                type: cow.type,
+                order: cow.order,
               });
             }}
           >
             <Card
-              key={limo._id.toString()}
-              coverNode={
-                <div className='bg-ctp-base text-ctp-text relative flex h-35 w-full items-center justify-center'>
-                  <span className='absolute top-3 left-3 text-xl font-bold italic md:text-2xl'>{`#${limo.order}`}</span>
-                  {limo.killed && (
-                    <div className='text-ctp-green absolute right-3 bottom-3'>
-                      <CheckCircle2Icon />
-                    </div>
-                  )}
-                </div>
-              }
+              key={cow._id.toString()}
+              coverNode={CardCover({
+                type: cow.type,
+                order: cow.order,
+                killed: cow.killed,
+                killedAt: cow.killedAt,
+                imgPath: '/images/sapi-limosin.webp',
+              })}
             >
               <Button>Sembelih</Button>
             </Card>
@@ -67,18 +64,15 @@ export default async function PenyembelihanPage() {
           >
             <Card
               key={bali._id.toString()}
-              coverNode={
-                <div className='bg-ctp-base text-ctp-text relative flex h-35 w-full items-center justify-center'>
-                  <span className='absolute top-3 left-3 text-xl font-bold italic md:text-2xl'>{`#${bali.order}`}</span>
-                  {bali.killed && (
-                    <div className='text-ctp-green absolute right-3 bottom-3'>
-                      <CheckCircle2Icon />
-                    </div>
-                  )}
-                </div>
-              }
+              coverNode={CardCover({
+                type: bali.type,
+                order: bali.order,
+                killed: bali.killed,
+                killedAt: bali.killedAt,
+                imgPath: '/images/sapi-bali.webp',
+              })}
             >
-              <Button>Sembelih</Button>
+              <Button type='submit'>Sembelih</Button>
             </Card>
           </form>
         ))}

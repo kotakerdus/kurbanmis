@@ -3,6 +3,7 @@ import { Card } from '@/components/card';
 import { WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { Log, LogType } from '@/types';
+import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
 
 export default async function LogsPage() {
   const db = client.db('kurban1447h');
@@ -25,13 +26,6 @@ export default async function LogsPage() {
                 penyembelihan: 'bg-ctp-red',
               };
 
-              const dateTime = new Date(log.timestamp);
-              const time = dateTime.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-              });
-
               return (
                 <li key={log.timestamp} className='not-last:pb-2'>
                   <div className='flex items-center gap-3'>
@@ -39,7 +33,7 @@ export default async function LogsPage() {
                       className={`h-3 w-3 rounded-full ${tagColor[log.type]}`}
                     />
                     <span className='font-mono text-sm text-gray-500 select-text'>
-                      {time}
+                      {toTwentyFourHours(log.timestamp)}
                     </span>
                     <p className='flex-1 select-text'>{log.text}</p>
                   </div>
