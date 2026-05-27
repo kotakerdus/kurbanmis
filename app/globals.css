@@ -14,6 +14,29 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --animate-bounce-tilt: bounceTilt 2s ease-in-out infinite;
+
+  @keyframes bounceTilt {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+      transform: translateX(-3px) translateY(-3px) rotate(-4deg);
+    }
+
+    50% {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    75% {
+      transform: translateX(3px) translateY(-3px) rotate(4deg);
+    }
+  }
+}
+
 @layer components {
   .card-layout-gap {
     @apply gap-2 sm:gap-4 md:gap-5 lg:gap-6;
