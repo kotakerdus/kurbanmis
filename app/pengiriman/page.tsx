@@ -75,6 +75,7 @@ export default async function PengirimanPage() {
                   'use server';
                   await updateDistribution({
                     id: trans._id.toString(),
+                    rt: trans.rt,
                     status,
                   });
                 }}

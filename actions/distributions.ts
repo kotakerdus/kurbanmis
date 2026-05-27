@@ -2,10 +2,19 @@ import client from '@/lib/mongodb';
 import { Distribution, DistributionStatus } from '@/types';
 import { ObjectId } from 'mongodb';
 import { revalidatePath } from 'next/cache';
+import { logAction } from './logs';
 
-type DistributionParams = { id: string; status: DistributionStatus };
+type DistributionParams = {
+  id: string;
+  rt: number;
+  status: DistributionStatus;
+};
 
-export async function updateDistribution({ id, status }: DistributionParams) {
+export async function updateDistribution({
+  id,
+  rt,
+  status,
+}: DistributionParams) {
   const db = client.db('kurban1447h');
   const query = { _id: new ObjectId(id) };
 
@@ -31,6 +40,18 @@ export async function updateDistribution({ id, status }: DistributionParams) {
   await db.collection('distributions').updateOne(query, {
     $set: updateSet,
   });
+
+  if (nextStatus) {
+    const nextStatusText =
+      nextStatus === 'otw'
+        ? 'Tim distribusi sedang menuju ke RT ' + rt
+        : 'Tim distribusi telah selesai mengirimkan daging kurban ke RT ' + rt;
+
+    await logAction({
+      text: nextStatusText,
+      type: 'distribusi',
+    });
+  }
 
   revalidatePath('/pengiriman');
 }
