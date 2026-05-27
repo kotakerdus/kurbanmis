@@ -56,16 +56,16 @@ export default async function PengirimanPage() {
                   <div className='aspect-square h-2 rounded-full bg-black' />
                 </div>
                 <div className='flex items-center justify-between px-1'>
-                  {trans.timestampStart && (
-                    <span className='text-sm'>
-                      {toTwentyFourHours(trans.timestampStart)}
-                    </span>
-                  )}
-                  {trans.timestampFin && (
-                    <span className='text-sm'>
-                      {toTwentyFourHours(trans.timestampFin)}
-                    </span>
-                  )}
+                  <span className='text-sm'>
+                    {trans.timestampStart
+                      ? toTwentyFourHours(trans.timestampStart)
+                      : '‎'}
+                  </span>
+                  <span className='text-sm'>
+                    {trans.timestampFin
+                      ? toTwentyFourHours(trans.timestampFin)
+                      : '‎'}
+                  </span>
                 </div>
               </div>
               <form
