@@ -1,11 +1,11 @@
 import { updateDistribution } from '@/actions/distributions';
 import { Button, PageTitle } from '@/components';
 import { Card } from '@/components/card';
+import { DistributionAnimation } from '@/components/distribution-animation';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { Distribution } from '@/types';
-import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
-import { CheckIcon, HouseIcon, SchoolIcon, TruckIcon } from 'lucide-react';
+import { CheckIcon } from 'lucide-react';
 
 export default async function PengirimanPage() {
   const db = client.db('kurban1447h');
@@ -35,39 +35,11 @@ export default async function PengirimanPage() {
                   <CheckIcon size={30} className='text-ctp-green' />
                 )}
               </div>
-              <div className='flex flex-col gap-2'>
-                <div className='flex justify-between'>
-                  {status && <SchoolIcon size={36} />}
-                  <TruckIcon
-                    size={36}
-                    className={`${status === 'otw' ? 'animate-bounce-tilt' : ''}`}
-                  />
-                  {status !== 'finish' && <HouseIcon size={36} />}
-                </div>
-                <div className='flex items-center justify-between px-4'>
-                  <div className='aspect-square h-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='aspect-square h-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='h-0.5 w-2 rounded-full bg-black' />
-                  <div className='aspect-square h-2 rounded-full bg-black' />
-                </div>
-                <div className='flex items-center justify-between px-1'>
-                  <span className='text-sm'>
-                    {trans.timestampStart
-                      ? toTwentyFourHours(trans.timestampStart)
-                      : '‎'}
-                  </span>
-                  <span className='text-sm'>
-                    {trans.timestampFin
-                      ? toTwentyFourHours(trans.timestampFin)
-                      : '‎'}
-                  </span>
-                </div>
-              </div>
+              <DistributionAnimation
+                status={status}
+                timestampStart={trans.timestampStart}
+                timestampFin={trans.timestampFin}
+              />
               <form
                 key={trans._id.toString() + 'form'}
                 className='flex'
