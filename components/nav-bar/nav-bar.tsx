@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { NavLink } from '.';
 
 export function NavBar() {
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = useState(true);
 
   return (
     <>
