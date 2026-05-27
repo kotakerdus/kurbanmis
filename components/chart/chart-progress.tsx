@@ -14,9 +14,9 @@ export function ChartProgress({
   const percentage = ((value / total) * 100).toFixed(0);
 
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='flex flex-col'>
       {title && <h6 className='text-md'>{title}</h6>}
-      <div className='mt-1 mb-2 flex items-center gap-2'>
+      <div className='mt-1 mb-2 flex items-center gap-4'>
         <div className='relative flex-1'>
           <div
             className='bg-ctp-surface1 grid h-2 overflow-hidden rounded-full lg:h-4'
