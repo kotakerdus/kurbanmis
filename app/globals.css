@@ -14,6 +14,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer components {
+  .card-layout-gap {
+    @apply gap-2 sm:gap-4 md:gap-5 lg:gap-6;
+  }
+  .card-layout-padding {
+    @apply p-2 sm:p-4 md:p-5 lg:p-6 xl:px-[10%];
+  }
+  .card-title {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  .card-border {
+    @apply rounded-md sm:rounded-lg md:rounded-xl;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
