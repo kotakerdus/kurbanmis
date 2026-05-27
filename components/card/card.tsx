@@ -13,7 +13,7 @@ export function Card({ title, coverNode, className, children }: CardProps) {
     >
       {coverNode}
       <div
-        className={`w-full gap-2 px-3 pb-3 sm:px-4 sm:pb-4 ${!coverNode ? 'pt-3 sm:pt-4' : 'pt-2 sm:pt-4'} ${flexOpt}`}
+        className={`w-full gap-2 px-3 pb-3 sm:px-4 sm:pb-4 ${!coverNode ? 'pt-3 sm:pt-4' : 'pt-3 sm:pt-4'} ${flexOpt}`}
       >
         {title && (
           <h2 className={`card-title ${children ? 'mb-4' : ''}`}>{title}</h2>
