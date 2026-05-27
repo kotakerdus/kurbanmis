@@ -7,6 +7,8 @@ import { Distribution, Log, LogType, QurbanList } from '@/types';
 import { relativeTime } from '@/utils/relativeTime';
 import { CheckIcon } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
   const db = client.db('kurban1447h');
   const data = await db

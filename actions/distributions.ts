@@ -53,5 +53,7 @@ export async function updateDistribution({
     });
   }
 
+  revalidatePath('/dashboard');
   revalidatePath('/pengiriman');
+  revalidatePath('/logs');
 }

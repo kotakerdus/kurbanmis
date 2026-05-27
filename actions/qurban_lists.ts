@@ -32,6 +32,7 @@ export async function updateCowsState({
   });
 
   revalidatePath('/penyembelihan');
+  revalidatePath('/pengambilan');
 }
 
 // ----------------------------------------------------------------------------
