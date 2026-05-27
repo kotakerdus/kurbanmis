@@ -1,4 +1,4 @@
-import { PageTitle } from '@/components';
+import { AutoRefresh, PageTitle } from '@/components';
 import { Card, CardNumber } from '@/components/card';
 import { ChartProgress } from '@/components/chart';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
@@ -136,6 +136,7 @@ export default async function DashboardPage() {
           </div>
         </Card>
       </WrapperCard>
+      <AutoRefresh />
     </WrapperMain>
   );
 }
