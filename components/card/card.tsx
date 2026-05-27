@@ -9,7 +9,7 @@ export function Card({ title, coverNode, className, children }: CardProps) {
 
   return (
     <div
-      className={`card-border border-ctp-text/20 overflow-clip border font-sans select-none ${coverNode ? flexOpt : ''} ${className}`}
+      className={`card-border border-ctp-surface1 overflow-clip border font-sans select-none ${coverNode ? flexOpt : ''} ${className}`}
     >
       {coverNode}
       <div
