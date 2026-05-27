@@ -7,6 +7,8 @@ import client from '@/lib/mongodb';
 import { Distribution } from '@/types';
 import { CheckIcon } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PengirimanPage() {
   const db = client.db('kurban1447h');
   const dist = await db

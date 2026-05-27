@@ -5,6 +5,8 @@ import client from '@/lib/mongodb';
 import { Log, LogType } from '@/types';
 import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
 
+export const dynamic = 'force-dynamic';
+
 export default async function LogsPage() {
   const db = client.db('kurban1447h');
   const logs = await db

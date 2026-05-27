@@ -5,6 +5,8 @@ import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { QurbanList } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PenyembelihanPage() {
   const db = client.db('kurban1447h');
   const qurban = await db
