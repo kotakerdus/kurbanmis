@@ -7,13 +7,13 @@ import { QurbanList } from '@/types';
 
 export default async function PenyembelihanPage() {
   const db = client.db('kurban1447h');
-  const data = await db
+  const qurban = await db
     .collection<QurbanList>('qurban_lists')
     .find({})
     .toArray();
 
-  const limosin = data.filter((sapi) => sapi.type === 'Limosin');
-  const bali = data.filter((sapi) => sapi.type === 'Bali');
+  const limosin = qurban.filter((sapi) => sapi.type === 'Limosin');
+  const bali = qurban.filter((sapi) => sapi.type === 'Bali');
 
   return (
     <WrapperMain>
@@ -32,6 +32,7 @@ export default async function PenyembelihanPage() {
           >
             <form
               key={limo._id.toString() + 'form'}
+              className='flex'
               action={async () => {
                 'use server';
                 await updateCowsState({
@@ -42,7 +43,9 @@ export default async function PenyembelihanPage() {
                 });
               }}
             >
-              <Button>Sembelih</Button>
+              <Button type='submit' className='mx-auto'>
+                Sembelih
+              </Button>
             </form>
           </Card>
         ))}
@@ -61,6 +64,7 @@ export default async function PenyembelihanPage() {
           >
             <form
               key={bali._id.toString() + 'form'}
+              className='flex'
               action={async () => {
                 'use server';
                 await updateCowsState({
@@ -71,7 +75,9 @@ export default async function PenyembelihanPage() {
                 });
               }}
             >
-              <Button type='submit'>Sembelih</Button>
+              <Button type='submit' className='mx-auto'>
+                Sembelih
+              </Button>
             </form>
           </Card>
         ))}
