@@ -54,7 +54,15 @@ export default async function PengambilanPage() {
                       disabled={!limo.killed}
                       className='flex w-full justify-between gap-2'
                     >
-                      <p className='truncate'>{sohibul.name}</p>
+                      <p
+                        className={`truncate ${
+                          sohibul.pickedUp
+                            ? 'text-ctp-surface2 italic line-through'
+                            : ''
+                        }`}
+                      >
+                        {sohibul.name}
+                      </p>
                       {sohibul.pickedUp && sohibul.pickedUpAt && (
                         <div className='text-ctp-green flex items-center gap-2'>
                           <p className='font-mono text-sm'>
@@ -80,7 +88,7 @@ export default async function PengambilanPage() {
               order: bali.order,
               killed: bali.killed,
               killedAt: bali.killedAt,
-              imgPath: '/images/sapi-limosin.webp',
+              imgPath: '/images/sapi-bali.webp',
             })}
           >
             <ul className='space-y-2'>
@@ -105,7 +113,15 @@ export default async function PengambilanPage() {
                       disabled={!bali.killed}
                       className='flex w-full justify-between gap-2'
                     >
-                      <p className='truncate'>{sohibul.name}</p>
+                      <p
+                        className={`truncate ${
+                          sohibul.pickedUp
+                            ? 'text-ctp-surface2 italic line-through'
+                            : ''
+                        }`}
+                      >
+                        {sohibul.name}
+                      </p>
                       {sohibul.pickedUp && sohibul.pickedUpAt && (
                         <div className='text-ctp-green flex items-center gap-2'>
                           <p className='font-mono text-sm'>
