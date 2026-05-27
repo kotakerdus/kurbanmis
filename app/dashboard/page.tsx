@@ -94,7 +94,7 @@ export default async function DashboardPage() {
             })}
           </ul>
         </Card>
-        <Card title='Update Terkini 🔥' className='col-span-2'>
+        <Card title='Update Terkini 🔥' className='col-span-2 lg:col-span-3'>
           <div className='relative'>
             {!logs.length && (
               <div className='flex h-full w-full items-center justify-center'>
