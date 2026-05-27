@@ -1,9 +1,7 @@
-import Card from '@/components/card/card';
-import CardNumber from '@/components/card/card-number';
-import ChartProgress from '@/components/chart/chart-progress';
-import PageTitle from '@/components/page-title';
-import WrapperCard from '@/components/wrapper/wrapper-card';
-import WrapperMain from '@/components/wrapper/wrapper-main';
+import { PageTitle } from '@/components';
+import { Card, CardNumber } from '@/components/card';
+import { ChartProgress } from '@/components/chart';
+import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { QurbanList } from '@/types';
 

@@ -4,7 +4,7 @@ import { toTitleCase } from '@/utils/toTitleCase';
 import { usePathname } from 'next/navigation';
 
 type PageTitleProps = { title?: string };
-export default function PageTitle({ title }: PageTitleProps) {
+export function PageTitle({ title }: PageTitleProps) {
   const path = toTitleCase(usePathname().split('/')[1]);
   return (
     <div className='mb-2 flex flex-col gap-1'>

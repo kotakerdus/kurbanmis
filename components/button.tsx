@@ -1,6 +1,6 @@
 type ButtonProps = React.HtmlHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({ className, children, ...props }: ButtonProps) {
+export function Button({ className, children, ...props }: ButtonProps) {
   return (
     <button
       {...props}

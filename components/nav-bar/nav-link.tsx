@@ -1,3 +1,5 @@
+'use client';
+
 import { toTitleCase } from '@/utils/toTitleCase';
 import {
   ClipboardCheckIcon,
@@ -17,7 +19,7 @@ type IconType =
   | 'logs';
 type IconProps = { link: IconType };
 
-export default function NavLink({ link }: IconProps) {
+export function NavLink({ link }: IconProps) {
   const path = usePathname();
   const isActive = path === `/${link}`;
   const iconNode: Record<IconType, React.ReactNode> = {

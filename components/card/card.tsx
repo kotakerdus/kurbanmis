@@ -4,12 +4,7 @@ export type CardProps = React.PropsWithChildren & {
   className?: string;
 };
 
-export default function Card({
-  title,
-  coverNode,
-  className,
-  children,
-}: CardProps) {
+export function Card({ title, coverNode, className, children }: CardProps) {
   const flexOpt = 'flex flex-col';
 
   return (

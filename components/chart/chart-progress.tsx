@@ -5,7 +5,7 @@ type ChartProgressProps = {
   counter?: { enable: boolean; suffix: string };
 };
 
-export default function ChartProgress({
+export function ChartProgress({
   title,
   value,
   total,

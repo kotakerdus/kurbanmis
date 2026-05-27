@@ -1,6 +1,6 @@
-import Card from '@/components/card/card';
-import PageTitle from '@/components/page-title';
-import WrapperMain from '@/components/wrapper/wrapper-main';
+import { PageTitle } from '@/components';
+import { Card } from '@/components/card';
+import { WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { Log, LogType } from '@/types';
 

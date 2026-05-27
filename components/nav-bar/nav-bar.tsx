@@ -1,11 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import NavLink from './nav-link';
-import NavUser from './nav-user';
+import { NavLink, NavUser } from '.';
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react';
 
-export default function NavBar() {
+export function NavBar() {
   const [hide, setHide] = useState(false);
 
   return (

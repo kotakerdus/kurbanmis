@@ -1,9 +1,7 @@
 import { updateCowsState } from '@/actions/qurban_lists';
-import Button from '@/components/button';
-import Card from '@/components/card/card';
-import PageTitle from '@/components/page-title';
-import WrapperCard from '@/components/wrapper/wrapper-card';
-import WrapperMain from '@/components/wrapper/wrapper-main';
+import { Button, PageTitle } from '@/components';
+import { Card } from '@/components/card';
+import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { QurbanList } from '@/types';
 import { CheckCircle2Icon } from 'lucide-react';

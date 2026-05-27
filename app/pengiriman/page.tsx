@@ -1,5 +1,5 @@
-import PageTitle from '@/components/page-title';
-import WrapperMain from '@/components/wrapper/wrapper-main';
+import { PageTitle } from '@/components';
+import { WrapperMain } from '@/components/wrapper';
 
 export default function PengirimanPage() {
   return (

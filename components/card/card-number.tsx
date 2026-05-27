@@ -1,4 +1,4 @@
-import Card, { CardProps } from './card';
+import { Card, CardProps } from '.';
 
 type CardNumberProps = CardProps & {
   title: string;
@@ -6,7 +6,7 @@ type CardNumberProps = CardProps & {
   prefix?: string;
 };
 
-export default function CardNumber({
+export function CardNumber({
   title,
   value,
   prefix,
