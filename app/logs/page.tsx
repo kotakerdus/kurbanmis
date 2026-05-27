@@ -1,4 +1,5 @@
 import Card from '@/components/card/card';
+import PageTitle from '@/components/page-title';
 import WrapperMain from '@/components/wrapper/wrapper-main';
 import client from '@/lib/mongodb';
 import { Log, LogType } from '@/types';
@@ -13,8 +14,9 @@ export default async function LogsPage() {
 
   return (
     <WrapperMain>
-      <Card title='Logs'>
-        {!!logs.length && (
+      <PageTitle />
+      {!!logs.length && (
+        <Card>
           <ul className='divide-ctp-text/20 space-y-2 divide-y'>
             {logs.map((log) => {
               const tagColor: Record<LogType, string> = {
@@ -31,7 +33,7 @@ export default async function LogsPage() {
               });
 
               return (
-                <li key={log.timestamp} className='pb-2'>
+                <li key={log.timestamp} className='not-last:pb-2'>
                   <div className='flex items-center gap-3'>
                     <div
                       className={`h-3 w-3 rounded-full ${tagColor[log.type]}`}
@@ -45,8 +47,8 @@ export default async function LogsPage() {
               );
             })}
           </ul>
-        )}
-      </Card>
+        </Card>
+      )}
     </WrapperMain>
   );
 }
