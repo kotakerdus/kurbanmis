@@ -1,5 +1,6 @@
 export type CowType = 'Limosin' | 'Bali';
 export type LogType = 'penyembelihan' | 'pengambilan' | 'distribusi';
+export type DistributionStatus = 'otw' | 'finish' | null;
 
 type Sohibul = {
   name: string;
@@ -20,4 +21,11 @@ export type Log = {
   text: string;
   type: LogType;
   timestamp: string;
+};
+
+export type Distribution = {
+  rt: number;
+  status: DistributionStatus;
+  timestampStart: string | null;
+  timestampFin: string | null;
 };
