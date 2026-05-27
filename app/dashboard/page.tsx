@@ -94,34 +94,43 @@ export default async function DashboardPage() {
         </Card>
         <Card title='Update Terkini 🔥' className='col-span-2'>
           <div className='relative'>
-            <div className='dark:from-background absolute top-0 h-5 w-full bg-linear-to-b from-white to-transparent' />
-            <div className='dark:from-background absolute bottom-0 h-5 w-full bg-linear-to-t from-white to-transparent' />
-            <ul className='divide-ctp-text/20 h-70 space-y-2 divide-y overflow-scroll'>
-              {logs.map((log) => {
-                const tagColor: Record<LogType, string> = {
-                  distribusi: 'bg-ctp-blue',
-                  pengambilan: 'bg-ctp-green',
-                  penyembelihan: 'bg-ctp-red',
-                };
+            {!logs.length && (
+              <div className='flex h-full w-full items-center justify-center'>
+                <p>Belum ada</p>
+              </div>
+            )}
+            {logs.length > 0 && (
+              <>
+                <div className='dark:from-background absolute top-0 h-5 w-full bg-linear-to-b from-white to-transparent' />
+                <div className='dark:from-background absolute bottom-0 h-5 w-full bg-linear-to-t from-white to-transparent' />
+                <ul className='divide-ctp-text/20 h-70 space-y-2 divide-y overflow-scroll'>
+                  {logs.map((log) => {
+                    const tagColor: Record<LogType, string> = {
+                      distribusi: 'bg-ctp-blue',
+                      pengambilan: 'bg-ctp-green',
+                      penyembelihan: 'bg-ctp-red',
+                    };
 
-                return (
-                  <li
-                    key={log.timestamp}
-                    className='not-last:pb-2 first:pt-2 last:pb-2'
-                  >
-                    <div className='flex items-center gap-3'>
-                      <div
-                        className={`h-3 w-3 rounded-full ${tagColor[log.type]}`}
-                      />
-                      <span className='font-mono text-sm text-gray-500 select-text'>
-                        {relativeTime(log.timestamp)}
-                      </span>
-                      <p className='flex-1 select-text'>{log.text}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+                    return (
+                      <li
+                        key={log.timestamp}
+                        className='not-last:pb-2 first:pt-2 last:pb-2'
+                      >
+                        <div className='flex items-center gap-3'>
+                          <div
+                            className={`h-3 w-3 rounded-full ${tagColor[log.type]}`}
+                          />
+                          <span className='font-mono text-sm text-gray-500 select-text'>
+                            {relativeTime(log.timestamp)}
+                          </span>
+                          <p className='flex-1 select-text'>{log.text}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         </Card>
       </WrapperCard>
