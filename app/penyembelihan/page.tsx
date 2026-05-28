@@ -1,4 +1,4 @@
-import { updateCowsState } from '@/actions/qurban_lists';
+import { updateFlow } from '@/actions/qurban_lists';
 import { Button, PageTitle } from '@/components';
 import { Card, CardCover } from '@/components/card';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
@@ -21,68 +21,108 @@ export default async function PenyembelihanPage() {
     <WrapperMain>
       <PageTitle />
       <WrapperCard className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-        {limosin.map((limo) => (
-          <Card
-            key={limo._id.toString()}
-            coverNode={CardCover({
-              type: limo.type,
-              order: limo.order,
-              killed: limo.killed,
-              killedAt: limo.killedAt,
-              imgPath: '/images/sapi-limosin.webp',
-            })}
-          >
-            <form
-              key={limo._id.toString() + 'form'}
-              className='flex'
-              action={async () => {
-                'use server';
-                await updateCowsState({
-                  id: limo._id.toString(),
-                  killed: !limo.killed,
-                  type: limo.type,
-                  order: limo.order,
-                });
-              }}
+        {limosin.map((limo) => {
+          const status = limo.flow.status;
+          const id = limo._id.toString();
+          const btnStr = (() => {
+            if (status === null) {
+              return 'Persiapan';
+            } else if (status === 'start') {
+              return 'Telah disembelih';
+            } else if (status === 'penyembelihan') {
+              return 'Proses';
+            } else if (status === 'proses') {
+              return 'Siap diambil';
+            } else if (status === 'ready') {
+              return 'Selesai';
+            }
+          })();
+
+          return (
+            <Card
+              key={limo._id.toString()}
+              coverNode={CardCover({
+                type: limo.type,
+                order: limo.order,
+                killed: limo.flow.penyembelihanAt !== null,
+                killedAt: limo.flow.penyembelihanAt,
+                imgPath: '/images/sapi-limosin.webp',
+              })}
             >
-              <Button type='submit' className='mx-auto'>
-                Sembelih
-              </Button>
-            </form>
-          </Card>
-        ))}
+              <form
+                key={id + 'form'}
+                className='flex'
+                action={async () => {
+                  'use server';
+                  await updateFlow({
+                    id,
+                    type: limo.type,
+                    order: limo.order,
+                    flow: limo.flow,
+                  });
+                }}
+              >
+                <Button type='submit' className='mx-auto'>
+                  {btnStr}
+                </Button>
+              </form>
+            </Card>
+          );
+        })}
       </WrapperCard>
       <WrapperCard className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-        {bali.map((bali) => (
-          <Card
-            key={bali._id.toString()}
-            coverNode={CardCover({
-              type: bali.type,
-              order: bali.order,
-              killed: bali.killed,
-              killedAt: bali.killedAt,
-              imgPath: '/images/sapi-bali.webp',
-            })}
-          >
-            <form
-              key={bali._id.toString() + 'form'}
-              className='flex'
-              action={async () => {
-                'use server';
-                await updateCowsState({
-                  id: bali._id.toString(),
-                  killed: !bali.killed,
-                  type: bali.type,
-                  order: bali.order,
-                });
-              }}
+        {bali.map((bali) => {
+          const status = bali.flow.status;
+          const id = bali._id.toString();
+          const btnStr = (() => {
+            if (status === null) {
+              return 'Persiapan';
+            } else if (status === 'start') {
+              return 'Telah disembelih';
+            } else if (status === 'penyembelihan') {
+              return 'Proses';
+            } else if (status === 'proses') {
+              return 'Siap diambil';
+            } else if (status === 'ready') {
+              return 'Selesai';
+            }
+          })();
+
+          return (
+            <Card
+              key={id}
+              coverNode={CardCover({
+                type: bali.type,
+                order: bali.order,
+                killed: bali.flow.penyembelihanAt !== null,
+                killedAt: bali.flow.penyembelihanAt,
+                imgPath: '/images/sapi-bali.webp',
+              })}
             >
-              <Button type='submit' className='mx-auto'>
-                Sembelih
-              </Button>
-            </form>
-          </Card>
-        ))}
+              <form
+                key={id + 'form'}
+                className='flex'
+                action={async () => {
+                  'use server';
+                  await updateFlow({
+                    id,
+                    type: bali.type,
+                    order: bali.order,
+                    flow: bali.flow,
+                  });
+                }}
+              >
+                <Button
+                  disabled={status === 'ready'}
+                  type='submit'
+                  className='mx-auto'
+                >
+                  {btnStr}
+                </Button>
+              </form>
+            </Card>
+          );
+        })}
       </WrapperCard>
     </WrapperMain>
   );

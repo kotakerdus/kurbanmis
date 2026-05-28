@@ -3,7 +3,9 @@ import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
 import { CheckIcon } from 'lucide-react';
 import Image from 'next/image';
 
-type CardCoverProps = Omit<QurbanList, 'sohibul'> & { imgPath: string };
+type CardCoverProps = Omit<QurbanList, 'flow' | 'sohibul'> & {
+  imgPath: string;
+};
 export function CardCover({
   type,
   order,

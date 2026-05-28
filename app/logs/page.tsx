@@ -26,6 +26,7 @@ export default async function LogsPage() {
                 distribusi: 'bg-ctp-blue',
                 pengambilan: 'bg-ctp-green',
                 penyembelihan: 'bg-ctp-red',
+                proses: 'bg-ctp-yellow',
               };
 
               return (

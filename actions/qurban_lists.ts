@@ -1,5 +1,5 @@
 import client from '@/lib/mongodb';
-import { CowType } from '@/types';
+import { CowType, QurbanList } from '@/types';
 import { ObjectId } from 'mongodb';
 import { revalidatePath } from 'next/cache';
 import { logAction } from './logs';
@@ -65,5 +65,53 @@ export async function updateSohibulState({
     type: 'pengambilan',
   });
 
+  revalidatePath('/pengambilan');
+}
+
+// ----------------------------------------------------------------------------
+
+type UpdateFlowParams = Omit<QurbanList, 'sohibul' | 'killed' | 'killedAt'> & {
+  id: string;
+};
+
+export async function updateFlow({ id, type, order, flow }: UpdateFlowParams) {
+  const db = client.db('kurban1447h');
+  const query = { _id: new ObjectId(id) };
+
+  const flowObj = (() => {
+    let message = '';
+    const newFlow = flow;
+    const now = new Date().toISOString();
+
+    if (newFlow.status === null) {
+      message = `Sapi ${type} #${order} sedang bersiap menuju tempat penyembelihan`;
+      newFlow.status = 'start';
+      newFlow.startAt = now;
+    } else if (newFlow.status === 'start') {
+      message = `Sapi ${type} #${order} telah disembelih`;
+      newFlow.status = 'penyembelihan';
+      newFlow.penyembelihanAt = now;
+    } else if (newFlow.status === 'penyembelihan') {
+      newFlow.status = 'proses';
+      message = `Sapi ${type} #${order} sedang dalam tahap proses pengulitan, penulangan, dan pembungkusan`;
+      newFlow.prosesAt = now;
+    } else if (newFlow.status === 'proses') {
+      message = `Daging sapi ${type} #${order} siap untuk diambil`;
+      newFlow.status = 'ready';
+      newFlow.readyAt = now;
+    }
+
+    return { newFlow, message };
+  })();
+
+  const updateSet = { flow: { ...flowObj.newFlow } };
+  await db.collection('qurban_lists').updateOne(query, { $set: updateSet });
+
+  await logAction({
+    text: flowObj.message,
+    type: 'proses',
+  });
+
+  revalidatePath('/penyembelihan');
   revalidatePath('/pengambilan');
 }

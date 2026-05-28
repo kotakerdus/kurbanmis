@@ -1,6 +1,15 @@
 export type CowType = 'Limosin' | 'Bali';
-export type LogType = 'penyembelihan' | 'pengambilan' | 'distribusi';
+export type FlowStatus = 'start' | 'penyembelihan' | 'proses' | 'ready';
+export type LogType = 'penyembelihan' | 'proses' | 'pengambilan' | 'distribusi';
 export type DistributionStatus = 'otw' | 'finish' | null;
+
+export type Flow = {
+  status: FlowStatus | null;
+  startAt: string | null;
+  penyembelihanAt: string | null;
+  prosesAt: string | null;
+  readyAt: string | null;
+};
 
 type Sohibul = {
   name: string;
@@ -12,6 +21,7 @@ type Sohibul = {
 export type QurbanList = {
   type: CowType;
   order: number;
+  flow: Flow;
   killed: boolean;
   killedAt: string | null;
   sohibul: Sohibul[];

@@ -5,7 +5,6 @@ import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { Distribution, Log, LogType, QurbanList } from '@/types';
 import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
-import { CheckIcon } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,13 +23,14 @@ export default async function DashboardPage() {
   const distributons = await db
     .collection<Distribution>('distributions')
     .find({})
+    .sort({ status: 1 })
     .toArray();
 
   const totalLimoSl = data.filter(
-    (cow) => cow.type === 'Limosin' && cow.killed,
+    (cow) => cow.type === 'Limosin' && cow.flow.penyembelihanAt !== null,
   ).length;
   const totalBaliSl = data.filter(
-    (cow) => cow.type === 'Bali' && cow.killed,
+    (cow) => cow.type === 'Bali' && cow.flow.penyembelihanAt !== null,
   ).length;
   const totalLimo = data.filter((cow) => cow.type === 'Limosin').length;
   const totalBali = data.filter((cow) => cow.type === 'Bali').length;
@@ -66,11 +66,10 @@ export default async function DashboardPage() {
       </Card>
       <WrapperCard className='grid grid-cols-3 grid-rows-2 lg:grid-cols-4'>
         <Card title='Distribusi 🚛' className='col-span-1'>
-          <ul className='divide-ctp-text/20 space-y-2 divide-y'>
+          <ul className='divide-ctp-text/20 h-70 space-y-2 divide-y overflow-scroll'>
             {distributons.map((dist) => {
               const id = dist._id.toString();
               const status = dist.status;
-
               const statusText = !status
                 ? 'Standby'
                 : status === 'otw'
@@ -85,9 +84,6 @@ export default async function DashboardPage() {
                   <p>{dist.locName}</p>
                   <div className='flex gap-2'>
                     <p>{statusText}</p>
-                    {status === 'finish' && (
-                      <CheckIcon size={20} className='text-ctp-green' />
-                    )}
                   </div>
                 </li>
               );
@@ -111,6 +107,7 @@ export default async function DashboardPage() {
                       distribusi: 'bg-ctp-blue',
                       pengambilan: 'bg-ctp-green',
                       penyembelihan: 'bg-ctp-red',
+                      proses: 'bg-ctp-yellow',
                     };
 
                     return (
