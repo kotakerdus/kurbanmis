@@ -4,7 +4,7 @@ import { ChartProgress } from '@/components/chart';
 import { WrapperCard, WrapperMain } from '@/components/wrapper';
 import client from '@/lib/mongodb';
 import { Distribution, Log, LogType, QurbanList } from '@/types';
-import { relativeTime } from '@/utils/relativeTime';
+import { toTwentyFourHours } from '@/utils/toTwentyFourHours';
 import { CheckIcon } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -123,7 +123,7 @@ export default async function DashboardPage() {
                             className={`h-3 w-3 rounded-full ${tagColor[log.type]}`}
                           />
                           <span className='font-mono text-sm text-gray-500 select-text'>
-                            {relativeTime(log.timestamp)}
+                            {toTwentyFourHours(log.timestamp)}
                           </span>
                           <p className='flex-1 select-text'>{log.text}</p>
                         </div>
