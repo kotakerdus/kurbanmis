@@ -29,8 +29,8 @@ export default async function PengambilanPage() {
             coverNode={CardCover({
               type: limo.type,
               order: limo.order,
-              killed: limo.killed,
-              killedAt: limo.killedAt,
+              killed: limo.flow.penyembelihanAt !== null,
+              killedAt: limo.flow.penyembelihanAt,
               imgPath: '/images/sapi-limosin.webp',
             })}
           >
@@ -52,10 +52,7 @@ export default async function PengambilanPage() {
                       });
                     }}
                   >
-                    <Button
-                      disabled={!limo.killed}
-                      className='flex w-full justify-between gap-2'
-                    >
+                    <Button className='flex w-full justify-between gap-2'>
                       <p
                         className={`truncate ${
                           sohibul.pickedUp
@@ -88,8 +85,8 @@ export default async function PengambilanPage() {
             coverNode={CardCover({
               type: bali.type,
               order: bali.order,
-              killed: bali.killed,
-              killedAt: bali.killedAt,
+              killed: bali.flow.penyembelihanAt !== null,
+              killedAt: bali.flow.penyembelihanAt,
               imgPath: '/images/sapi-bali.webp',
             })}
           >
@@ -111,10 +108,7 @@ export default async function PengambilanPage() {
                       });
                     }}
                   >
-                    <Button
-                      disabled={!bali.killed}
-                      className='flex w-full justify-between gap-2'
-                    >
+                    <Button className='flex w-full justify-between gap-2'>
                       <p
                         className={`truncate ${
                           sohibul.pickedUp
