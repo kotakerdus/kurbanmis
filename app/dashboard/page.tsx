@@ -82,7 +82,7 @@ export default async function DashboardPage() {
                   key={id}
                   className='flex justify-between not-last:pb-2 first:pt-2 last:pb-2'
                 >
-                  <p>RT {dist.rt}</p>
+                  <p>{dist.locName}</p>
                   <div className='flex gap-2'>
                     <p>{statusText}</p>
                     {status === 'finish' && (

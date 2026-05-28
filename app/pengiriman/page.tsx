@@ -32,7 +32,7 @@ export default async function PengirimanPage() {
           return (
             <Card key={trans._id.toString()}>
               <div className='mb-4 flex items-center justify-between'>
-                <h2 className='text-3xl'>RT {trans.rt}</h2>
+                <h2 className='text-3xl'>{trans.locName}</h2>
                 {status === 'finish' && (
                   <CheckIcon size={30} className='text-ctp-green' />
                 )}
@@ -49,8 +49,9 @@ export default async function PengirimanPage() {
                   'use server';
                   await updateDistribution({
                     id: trans._id.toString(),
-                    rt: trans.rt,
+                    locName: trans.locName,
                     status,
+                    value: trans.value,
                   });
                 }}
               >

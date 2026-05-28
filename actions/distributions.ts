@@ -6,14 +6,16 @@ import { logAction } from './logs';
 
 type DistributionParams = {
   id: string;
-  rt: number;
+  locName: string;
   status: DistributionStatus;
+  value: string;
 };
 
 export async function updateDistribution({
   id,
-  rt,
+  locName,
   status,
+  value,
 }: DistributionParams) {
   const db = client.db('kurban1447h');
   const query = { _id: new ObjectId(id) };
@@ -44,8 +46,11 @@ export async function updateDistribution({
   if (nextStatus) {
     const nextStatusText =
       nextStatus === 'otw'
-        ? 'Tim distribusi sedang menuju ke RT ' + rt
-        : 'Tim distribusi telah selesai mengirimkan daging kurban ke RT ' + rt;
+        ? 'Tim distribusi sedang menuju ke ' + locName
+        : 'Tim distribusi telah selesai mengirimkan daging kurban ke ' +
+          locName +
+          ' sebanyak ' +
+          value;
 
     await logAction({
       text: nextStatusText,

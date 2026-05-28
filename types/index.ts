@@ -24,7 +24,8 @@ export type Log = {
 };
 
 export type Distribution = {
-  rt: number;
+  locName: string;
+  value: string;
   status: DistributionStatus;
   timestampStart: string | null;
   timestampFin: string | null;
